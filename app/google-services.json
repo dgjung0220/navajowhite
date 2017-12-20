@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "793977725079",
+    "firebase_url": "https://arnaviprototype.firebaseio.com",
+    "project_id": "arnaviprototype",
+    "storage_bucket": "arnaviprototype.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793977725079:android:5ea8a1776d55a170",
+        "android_client_info": {
+          "package_name": "com.bearpot.arNaviProto1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793977725079-a7dbq50f32sardkkbn4l28sgiio8lgha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bearpot.arNaviProto1",
+            "certificate_hash": "9c9c0d7411fba1d028c54c1735fcc84720f7df3e"
+          }
+        },
+        {
+          "client_id": "793977725079-fnfbtndjd0q2dglco002s87oauadcak1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPmtG2HU370XDzVNSmXSgcqyH2vCFRfVc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793977725079-fnfbtndjd0q2dglco002s87oauadcak1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
