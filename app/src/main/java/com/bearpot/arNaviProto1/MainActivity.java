@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onInit(final int status) {
                         if (status == TextToSpeech.SUCCESS) {
                             Log.d("TTS", "Text to speech engine started successfully.");
-                            tts.setLanguage(Locale.US);
+                            tts.setLanguage(Locale.KOREAN);
                         } else {
                             Log.d("TTS", "Error starting the text to speech engine.");
                         }
@@ -354,11 +354,11 @@ public class MainActivity extends AppCompatActivity {
                 target = text.getValue();
                 Log.d(TAG, "text data is being spoken!" + target);
 
+                tts.speak(target + " 맞습니까?", TextToSpeech.QUEUE_ADD, null, "DEFAULT");
                 Snackbar.make(mGraphicOverlay,target + "이 맞습니까?", Snackbar.LENGTH_LONG).setAction("확인", new View.OnClickListener(){
                     @Override
                     public void onClick(View view) {
                         saveTarget();
-                        //tts.speak(target, TextToSpeech.QUEUE_ADD, null, "DEFAULT");
                     }
                 }).show();
 
@@ -451,9 +451,12 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseDatabase.getReference("targets/"+mFirebaseUser.getUid()+"/")
                 .setValue(targetVo)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onSuccess(Void aVoid) {
                         Snackbar.make(mGraphicOverlay, target +"으로 부터 경로를 재탐색합니다.", Snackbar.LENGTH_LONG).show();
+                        tts.speak(target + "" +
+                                "부터 경로를 재탐색합니다.", TextToSpeech.QUEUE_ADD, null, "DEFAULT");
                     }
                 });
     }
