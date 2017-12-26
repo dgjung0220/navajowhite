@@ -23,6 +23,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bearpot.arNaviProto1.VO.Target;
@@ -32,6 +33,7 @@ import com.bearpot.arNaviProto1.ui.camera.GraphicOverlay;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,16 +77,15 @@ public class MainActivity extends AppCompatActivity {
     // Firebase Auth
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-
     private static FirebaseDatabase mFirebaseDatabase;
-
     static {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseDatabase.setPersistenceEnabled(true);
     }
 
     private String target = null;
-
+    private TextView txtEmail = null;
+    private TextView txtName = null;
     /**
      * Initializes the UI and creates the detector pipeline.
      */
@@ -92,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_main);
+
+        //txtEmail = (TextView) findViewById(R.id.txtEmail);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -121,9 +124,7 @@ public class MainActivity extends AppCompatActivity {
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
-        Snackbar.make(mGraphicOverlay, "Tap to Speak. Pinch/Stretch to zoom",
-                Snackbar.LENGTH_LONG)
-                .show();
+        Snackbar.make(mGraphicOverlay, "Tap to Speak. Pinch/Stretch to zoom", Snackbar.LENGTH_LONG).show();
 
         // TODO: Set up the Text To Speech engine.
         TextToSpeech.OnInitListener listener =
@@ -139,6 +140,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
         tts = new TextToSpeech(this.getApplicationContext(), listener);
+
+        txtEmail = (TextView) findViewById(R.id.txtEmail);
+        txtName = (TextView) findViewById(R.id.txtName);
+
+        profileUpdate();
     }
 
     /**
@@ -459,6 +465,11 @@ public class MainActivity extends AppCompatActivity {
                                 "부터 경로를 재탐색합니다.", TextToSpeech.QUEUE_ADD, null, "DEFAULT");
                     }
                 });
+    }
+
+    private void profileUpdate() {
+        txtEmail.setText(mFirebaseUser.getEmail());
+        txtName.setText(mFirebaseUser.getDisplayName());
     }
 }
 
